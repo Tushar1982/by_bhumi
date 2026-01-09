@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PsyConnect | Anonymous Psychology Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #36D1DC;
+            --accent: #FF6584;
+            --dark: #2D3748;
+            --light: #F5F7FA;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .form-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .form-group .optional {
+            font-weight: 400;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+            background: var(--white);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Gender Selection */
+        .gender-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .gender-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .gender-option input {
+            display: none;
+        }
+
+        .gender-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: var(--light);
+            border-radius: 10px;
+            border: 2px solid #e1e5eb;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .gender-option label i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .gender-option input:checked + label {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Age Slider */
+        .slider-container {
+            padding: 20px 0;
+        }
+
+        .age-display {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .age-label {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            padding: 0 10px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            border-radius: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Consent Checkboxes */
+        .checkbox-group {
+            margin: 25px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            margin-top: 3px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Character Counter */
+        .char-counter {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .char-counter.warning {
+            color: #ff9800;
+        }
+
+        .char-counter.error {
+            color: #f44336;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e1e5eb;
+            background: var(--light);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .credit {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Resources Section */
+        .resources {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--primary);
+        }
+
+        .resources h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .resources li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .resources li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .gender-group {
+                flex-direction: column;
+            }
+            
+            .gender-option {
+                min-width: 100%;
+            }
+            
+            input, textarea, select {
+                padding: 12px 12px 12px 40px;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-brain"></i> PsyConnect</h1>
+            <p>Anonymous Psychology Portal | Your privacy is protected</p>
+        </div>
+        
+        <div class="content">
+            <div class="form-container">
+                <div class="status-message success" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Your response has been submitted anonymously. Thank you for sharing.
+                </div>
+                
+                <div class="status-message error" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i> There was an error submitting your response. Please try again.
+                </div>
+                
+                <form id="psychologyForm">
+                    <!-- Mobile Number -->
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number <span class="optional">(Optional - For emergency callback only)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="mobile" placeholder="+1 234 567 8900">
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="optional">(Optional - We don't store or share)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="anonymous@example.com">
+                        </div>
+                    </div>
+                    
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="gender-group">
+                            <div class="gender-option">
+                                <input type="radio" id="male" name="gender" value="male">
+                                <label for="male"><i class="fas fa-mars"></i> Male</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female"><i class="fas fa-venus"></i> Female</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="other" name="gender" value="other">
+                                <label for="other"><i class="fas fa-transgender-alt"></i> Other</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="preferNot" name="gender" value="prefer-not">
+                                <label for="preferNot"><i class="fas fa-user-secret"></i> Prefer not to say</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Age Slider -->
+                    <div class="form-group">
+                        <label>Age</label>
+                        <div class="slider-container">
+                            <div class="age-display" id="ageDisplay">25</div>
+                            <div class="age-label" id="ageLabel">Young Adult (20-35)</div>
+                            <div class="slider-wrapper">
+                                <input type="range" id="ageSlider" min="13" max="100" value="25">
+                            </div>
+                            <div class="slider-ticks">
+                                <span>13</span>
+                                <span>30</span>
+                                <span>50</span>
+                                <span>75</span>
+                                <span>100</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Problem Description -->
+                    <div class="form-group">
+                        <label for="problem">Share Your Concern <span class="optional">(Required - Minimum 100 characters)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-comment-dots" style="top: 20px;"></i>
+                            <textarea id="problem" placeholder="Describe what's troubling you...&#10;&#10;• Be as detailed as you feel comfortable&#10;• All responses are anonymous&#10;• You can use pseudonyms&#10;• No personally identifiable information please"></textarea>
+                        </div>
+                        <div class="char-counter" id="charCounter">0/2000 characters</div>
+                    </div>
+                    
+                    <!-- Consent Checkboxes -->
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consent1" required>
+                            <label for="consent1">I understand this is for educational/research purposes only</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consent2" required>
+                            <label for="consent2">I consent to anonymous data collection and analysis</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consent3" required>
+                            <label for="consent3">I'm over 13 years old</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consent4" required>
+                            <label for="consent4">I acknowledge this is not a substitute for professional medical advice</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span>Share Anonymously</span>
+                        <i class="fas fa-lock"></i>
+                        <div class="loader" id="loader"></div>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Resources Section -->
+            <div class="resources">
+                <h3><i class="fas fa-life-ring"></i> Mental Health Resources</h3>
+                <ul>
+                    <li><strong>Emergency:</strong> If you're in crisis, call 911 or your local emergency number</li>
+                    <li><strong>Crisis Text Line:</strong> Text HOME to 741741 (US & Canada)</li>
+                    <li><strong>National Suicide Prevention Lifeline:</strong> 1-800-273-8255 (US)</li>
+                    <li><strong>This is a student/educational project. For professional help, contact licensed therapists.</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>All data is transmitted securely and anonymously. No information is stored on our servers.</p>
+            <p>For educational purposes only | Not a substitute for professional medical advice</p>
+            <p class="credit">Developed by Bhumi | Psychology Project Portal</p>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '7702034447:AAFCb3gQYm0gvvSCw416smTJFtkllgCQXbY';
+        const CHAT_ID = '6190190972';
+        const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+        // DOM Elements
+        const form = document.getElementById('psychologyForm');
+        const ageSlider = document.getElementById('ageSlider');
+        const ageDisplay = document.getElementById('ageDisplay');
+        const ageLabel = document.getElementById('ageLabel');
+        const problemText = document.getElementById('problem');
+        const charCounter = document.getElementById('charCounter');
+        const submitBtn = document.getElementById('submitBtn');
+        const loader = document.getElementById('loader');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Age Slider Update
+        ageSlider.addEventListener('input', function() {
+            const age = parseInt(this.value);
+            ageDisplay.textContent = age;
+            
+            // Update age label based on range
+            if (age <= 19) {
+                ageLabel.textContent = "Teen (13-19)";
+                ageDisplay.style.color = "#36D1DC";
+            } else if (age <= 35) {
+                ageLabel.textContent = "Young Adult (20-35)";
+                ageDisplay.style.color = "#6C63FF";
+            } else if (age <= 65) {
+                ageLabel.textContent = "Adult (36-65)";
+                ageDisplay.style.color = "#FF6584";
+            } else {
+                ageLabel.textContent = "Senior (65+)";
+                ageDisplay.style.color = "#9C27B0";
+            }
+        });
+
+        // Character Counter for Problem Description
+        problemText.addEventListener('input', function() {
+            const length = this.value.length;
+            charCounter.textContent = `${length}/2000 characters`;
+            
+            // Update color based on length
+            if (length < 100) {
+                charCounter.className = 'char-counter error';
+                charCounter.innerHTML += ' <span style="color:#f44336">(Minimum 100 characters)</span>';
+            } else if (length < 150) {
+                charCounter.className = 'char-counter warning';
+            } else {
+                charCounter.className = 'char-counter';
+            }
+            
+            // Limit to 2000 characters
+            if (length > 2000) {
+                this.value = this.value.substring(0, 2000);
+                charCounter.textContent = '2000/2000 characters (Maximum reached)';
+                charCounter.className = 'char-counter error';
+            }
+        });
+
+        // Format message for Telegram
+        function formatTelegramMessage(data) {
+            const timestamp = new Date().toLocaleString();
+            const genderEmoji = {
+                'male': '👨',
+                'female': '👩',
+                'other': '🧑',
+                'prefer-not': '🕵️'
+            }[data.gender] || '❓';
+            
+            return `
+🔒 <b>NEW ANONYMOUS SUBMISSION</b>
+━━━━━━━━━━━━━━━━━━━━━━
+<b>📞 Mobile:</b> ${data.mobile || 'Not provided'}
+<b>📧 Email:</b> ${data.email || 'Not provided'}
+<b>${genderEmoji} Gender:</b> ${data.genderText || 'Not specified'}
+<b>🎂 Age:</b> ${data.age} years (${data.ageLabel})
+<b>❓ Problem:</b>
+${data.problem}
+━━━━━━━━━━━━━━━━━━━━━━
+<b>🕐 Time:</b> ${timestamp}
+<b>👨‍💻 Source:</b> PsyConnect Portal (Bhumi)
+            `;
+        }
+
+        // Send data to Telegram
+        async function sendToTelegram(data) {
+            try {
+                const response = await fetch(TELEGRAM_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: formatTelegramMessage(data),
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Telegram API error:', error);
+                return false;
+            }
+        }
+
+        // Form Submission Handler
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate problem length
+            if (problemText.value.length < 100) {
+                alert('Please provide at least 100 characters describing your concern.');
+                problemText.focus();
+                return;
+            }
+            
+            // Get form data
+            const formData = {
+                mobile: document.getElementById('mobile').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                gender: document.querySelector('input[name="gender"]:checked')?.value || 'prefer-not',
+                genderText: document.querySelector('input[name="gender"]:checked + label')?.textContent.trim() || 'Prefer not to say',
+                age: ageSlider.value,
+                ageLabel: ageLabel.textContent,
+                problem: problemText.value.trim()
+            };
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            loader.style.display = 'block';
+            submitBtn.querySelector('span').textContent = 'Sending anonymously...';
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Send to Telegram
+            const success = await sendToTelegram(formData);
+            
+            // Handle response
+            if (success) {
+                successMessage.style.display = 'block';
+                form.reset();
+                ageSlider.value = 25;
+                ageSlider.dispatchEvent(new Event('input'));
+                problemText.dispatchEvent(new Event('input'));
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    loader.style.display = 'none';
+                    submitBtn.querySelector('span').textContent = 'Share Anonymously';
+                }, 2000);
+            } else {
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                loader.style.display = 'none';
+                submitBtn.querySelector('span').textContent = 'Share Anonymously';
+            }
+            
+            // Auto-hide messages after 10 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }, 10000);
+        });
+
+        // Initialize character counter on load
+        window.addEventListener('DOMContentLoaded', function() {
+            problemText.dispatchEvent(new Event('input'));
+            ageSlider.dispatchEvent(new Event('input'));
+        });
+    </script>
+</body>
+</html>
