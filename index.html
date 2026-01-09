@@ -763,7 +763,7 @@
                     <a href="#admin-countdown">Breath Timer</a>
                     
                     <!-- Connect with Bhumi Button in Header -->
-                    <a href="bc.html" class="connect-top-btn">
+                    <a href="bc.html" class="connect-top-btn" id="connectTopBtn">
                         <i class="fas fa-comments"></i> Connect with Bhumi
                     </a>
                 </div>
@@ -1021,7 +1021,7 @@
             <div class="bhumi-connect">
                 <h3>Connect with Bhumi <span class="free-badge">FREE</span></h3>
                 <p>Get personalized psychology advice and wellness coaching directly from Bhumi. Start your journey to better mental health and relationships today - completely free for a limited time!</p>
-                <a href="bc.html" class="connect-button">Connect with Bhumi FREE</a>
+                <a href="bc.html" class="connect-button" id="connectBottomBtn">Connect with Bhumi FREE</a>
             </div>
             
             <div class="footer-content">
@@ -1429,16 +1429,9 @@
         });
         
         // Bhumi Connect button redirect - both top and bottom buttons
-        document.querySelectorAll('.connect-top-btn, .connect-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // In a real implementation, this would redirect to bc.html
-                // For this demo, we'll just show an alert
-                e.preventDefault();
-                alert('Redirecting to Bhumi\'s connection page (bc.html)... In a real implementation, this would navigate to the bc.html page.');
-                // Uncomment the line below for actual redirect
-                // window.location.href = 'bc.html';
-            });
-        });
+        // REMOVED the event listeners that were preventing default and showing alerts
+        // Now the buttons will naturally redirect to bc.html via their href attributes
+        
     </script>
 </body>
 </html>
