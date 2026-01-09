@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace | Anonymous Professional Psychology Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #5d5fef;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --success: #10b981;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f0f4ff 0%, #f9f5ff 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(93, 95, 239, 0.2));
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        
+        .credit {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(93, 95, 239, 0.08);
+            border-radius: 30px;
+            border: 1px solid rgba(93, 95, 239, 0.1);
+            animation: fadeInDown 1s ease 0.2s both;
+        }
+        
+        .credit span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 0 80px;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(93, 95, 239, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            z-index: -2;
+        }
+        
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .hero-title {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+        
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title span:after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(93, 95, 239, 0.15);
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: var(--gray);
+            max-width: 600px;
+            font-weight: 400;
+        }
+        
+        /* Animated Stats */
+        .stats-container {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        /* Main CTA Button */
+        .main-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            font-size: 20px;
+            font-weight: 600;
+            padding: 20px 45px;
+            border-radius: 14px;
+            text-decoration: none;
+            margin: 20px 0 40px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(93, 95, 239, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            animation: pulse 2s infinite;
+        }
+        
+        .main-cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.8s;
+        }
+        
+        .main-cta-button:hover:before {
+            left: 100%;
+        }
+        
+        .main-cta-button:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(93, 95, 239, 0.4);
+        }
+        
+        .free-badge {
+            background-color: var(--success);
+            color: var(--white);
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 30px;
+            margin-left: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 70px;
+            font-weight: 800;
+            color: var(--dark);
+            position: relative;
+            letter-spacing: -1px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(93, 95, 239, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            height: 80px;
+            width: 80px;
+            line-height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(93, 95, 239, 0.08);
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Self-Care Tips */
+        .tips-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(240, 244, 255, 0.8) 100%);
+            position: relative;
+            border-radius: 40px 40px 0 0;
+            margin-top: 60px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .tip-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tip-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            font-size: 22px;
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(93, 95, 239, 0.2);
+        }
+        
+        .tip-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .tip-content p {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Connect Section */
+        .connect-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px;
+            margin: 60px 0;
+            box-shadow: 0 20px 60px rgba(93, 95, 239, 0.3);
+        }
+        
+        .connect-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .connect-title {
+            font-size: 48px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .connect-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+        
+        .connect-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background-color: var(--white);
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 700;
+            padding: 22px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            margin: 30px 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            transform: translateY(0);
+        }
+        
+        .connect-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            background-color: var(--dark);
+            color: var(--white);
+        }
+        
+        /* Animated Background Elements */
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(93, 95, 239, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-shape:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+        }
+        
+        .floating-shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 2s;
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .floating-shape:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 4s;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .floating-shape:nth-child(4) {
+            top: 20%;
+            right: 20%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 6s;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .copyright {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg); 
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(93, 95, 239, 0.3);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(93, 95, 239, 0.5);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 46px;
+            }
+            
+            .connect-title {
+                font-size: 40px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .features-grid, .tips-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 38px;
+            }
+            
+            .main-cta-button, .connect-button {
+                font-size: 18px;
+                padding: 18px 35px;
+            }
+            
+            .connect-title {
+                font-size: 34px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .stats-container {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .main-cta-button, .connect-button {
+                font-size: 17px;
+                padding: 16px 30px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .connect-title {
+                font-size: 28px;
+            }
+            
+            .features-grid, .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tip-card {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">SafeSpace</div>
+                </div>
+                <div class="credit">project by <span>bhumi</span></div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Anonymous Support with <span>Professional Psychologists</span></h1>
+                <p class="hero-subtitle">Get confidential, judgment-free mental health support from licensed professionals. Your identity is protected, your privacy is guaranteed, and your well-being is our priority.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">% Anonymous</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">/7 Availability</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5000">0</div>
+                        <div class="stat-label">+ People Helped</div>
+                    </div>
+                </div>
+                
+                <a href="1.html" class="main-cta-button">
+                    <i class="fas fa-lock"></i>
+                    Start Anonymous Session 
+                    <span class="free-badge">FREE</span>
+                </a>
+                
+                <p style="font-size: 16px; color: var(--gray);">
+                    <i class="fas fa-user-secret"></i> No personal details required | 
+                    <i class="fas fa-shield-alt"></i> End-to-end encryption | 
+                    <i class="fas fa-comment-medical"></i> Professional guidance
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Anonymous Support</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Complete Anonymity</h3>
+                    <p>Your identity is completely protected. No personal information is required to start your session.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Military-Grade Security</h3>
+                    <p>End-to-end encryption ensures your conversations remain private and confidential.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Professional Expertise</h3>
+                    <p>Connect with experienced psychologists specializing in various therapeutic approaches.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Self-Care Tips Section -->
+    <section class="tips-section">
+        <div class="container">
+            <h2 class="section-title">Mental Wellness Strategies</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: var(--gray); font-size: 18px;">Simple practices you can incorporate into your daily routine to improve mental well-being.</p>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Box Breathing</h3>
+                        <p>Inhale for 4 seconds, hold for 4, exhale for 4, pause for 4. Repeat 5 times to calm your nervous system.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Mindful Meditation</h3>
+                        <p>Start with just 5 minutes daily. Focus on your breath without judgment to reduce stress and anxiety.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Hydration Check</h3>
+                        <p>Dehydration affects mood and cognition. Drink at least 8 glasses of water throughout the day.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Morning Sunlight</h3>
+                        <p>Get 10-15 minutes of morning sunlight to regulate circadian rhythm and boost serotonin levels.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Emotional Journaling</h3>
+                        <p>Write freely about your thoughts and feelings for 10 minutes daily to process emotions.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="tip-content">
+                        <h3>Social Connection</h3>
+                        <p>Reach out to a trusted friend or family member regularly. Social support is crucial for mental health.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Connect Section -->
+    <section class="connect-section">
+        <div class="container">
+            <h2 class="connect-title">Connect with a Professional Psychologist</h2>
+            <p class="connect-subtitle">Take the first step toward better mental health. Our licensed psychologists provide compassionate, confidential support in a safe, anonymous environment.</p>
+            
+            <a href="1.html" class="connect-button">
+                <i class="fas fa-comment-dots"></i>
+                Start Your Free Session Now
+            </a>
+            
+            <p class="connect-subtitle" style="font-size: 18px; margin-top: 20px;">
+                <i class="fas fa-check-circle"></i> Completely anonymous | 
+                <i class="fas fa-clock"></i> 24/7 availability | 
+                <i class="fas fa-user-md"></i> Licensed professionals
+            </p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div style="margin-bottom: 20px;">
+                <div class="logo" style="justify-content: center;">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">SafeSpace</div>
+                </div>
+                <p style="margin-top: 10px; color: #cbd5e1;">project by <span style="color: var(--accent); font-weight: 600;">bhumi</span></p>
+            </div>
+            
+            <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto;">A safe space for mental health support where your privacy is our priority</p>
+            
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Security</a>
+                <a href="#">How It Works</a>
+                <a href="#">FAQs</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 SafeSpace. A project by bhumi. All rights reserved.<br>
+                For emergencies, please contact your local emergency services or crisis hotline.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Animated counter for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200; // The lower the slower
+            
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText;
+                    
+                    const inc = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                updateCount();
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Animate counters when stats section is visible
+                    if (entry.target.classList.contains('hero-content')) {
+                        setTimeout(animateCounters, 500);
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Apply initial styles and observe elements
+        document.querySelectorAll('.feature-card, .tip-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+        
+        // Observe hero content
+        const heroContent = document.querySelector('.hero-content');
+        heroContent.style.opacity = '0';
+        observer.observe(heroContent);
+        
+        // Button click effects
+        const buttons = document.querySelectorAll('.main-cta-button, .connect-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size/2;
+                const y = e.clientY - rect.top - size/2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple-animation 0.8s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                    z-index: 1;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 800);
+                
+                // Log for debugging
+                console.log("Redirecting to anonymous session page...");
+            });
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Floating shapes random movement
+        const floatingShapes = document.querySelectorAll('.floating-shape');
+        floatingShapes.forEach((shape, index) => {
+            // Randomize initial positions
+            const randomX = Math.random() * 80 + 10;
+            const randomY = Math.random() * 80 + 10;
+            const randomSize = Math.random() * 60 + 40;
+            const randomDuration = Math.random() * 5 + 8;
+            
+            shape.style.left = `${randomX}%`;
+            shape.style.top = `${randomY}%`;
+            shape.style.width = `${randomSize}px`;
+            shape.style.height = `${randomSize}px`;
+            shape.style.animationDuration = `${randomDuration}s`;
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.05)';
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+        
+        // Add parallax effect to hero background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
